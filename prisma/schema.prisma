@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id Int @id @default(autoincrement())
+  first_name String
+  last_name String
+  phone_number Int @unique
+  email String @unique
+  hashed_password String
+  address String
+  district String
+  city String
+  state String
+  pincode Int
+  cart Service_Cart[]
+  bill Bill[]
+}
+
+model Service_Cart{
+  customer User @relation(fields: [card_id], references: [user_id])
+  card_id Int @id @default(autoincrement())
+  current_total Float
+}
+
+model Bill {
+  bill_number Int @id @default(autoincrement())
+  customer User @relation(fields: [customer_id], references: [user_id])
+  customer_id Int
+  services Service[]
+  service_id Int  @unique
+  date DateTime 
+  bill_amount Float
+}
+
+model Event_Vendor {
+  event_vendor_id Int @id @default(autoincrement())
+  first_name String
+  last_name String
+  business_number Int @unique
+  business_email String
+  hashed_password String
+  GST_number String @unique
+  business_address String
+  district String
+  city String
+  state String
+  pincode Int
+  services Service[]
+}
+
+model Service {
+  service_id Int @id @default(autoincrement())
+  bills Bill @relation(fields: [service_id], references: [service_id])
+  event_vendor Event_Vendor @relation(fields: [event_vendor_id], references: [event_vendor_id])
+  event_vendor_id Int
+  service_name String
+  service_description String
+  charges Float
+  categories Category[]
+}
+
+model Category {
+  category_id Int @id @default(autoincrement())
+  services Service @relation(fields: [service_id], references: [service_id])
+  service_id Int
+}
+//AUTH_SECRET="ftGK15Vot1oR9N+H+I0jlYn0Qfm87vZKLkBj6EhCtuw=" # Added by `npx auth`. Read more: https://cli.authjs.dev
