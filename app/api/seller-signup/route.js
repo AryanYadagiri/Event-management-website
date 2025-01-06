@@ -3,6 +3,17 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
+    const checker = prisma.event_Vendor.findUnique({
+      where: { business_email: request.business_email },
+    });
+
+    if (checker) {
+      return NextResponse.json(
+        { message: "Email already used." },
+        { status: 409 }
+      );
+    }
+
     prisma.event_Vendor.create({
       data: {
         first_name: request.first_name,

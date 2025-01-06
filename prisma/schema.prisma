@@ -76,5 +76,4 @@ model Category {
   category_id Int @id @default(autoincrement())
   services Service @relation(fields: [service_id], references: [service_id])
   service_id Int
-}
-//AUTH_SECRET="ftGK15Vot1oR9N+H+I0jlYn0Qfm87vZKLkBj6EhCtuw=" # Added by `npx auth`. Read more: https://cli.authjs.dev
+} 
