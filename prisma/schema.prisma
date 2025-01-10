@@ -14,66 +14,68 @@ datasource db {
 }
 
 model User {
-  user_id Int @id @default(autoincrement())
-  first_name String
-  last_name String
-  phone_number Int @unique
-  email String @unique
+  user_id         Int            @id @default(autoincrement())
+  first_name      String
+  last_name       String
+  phone_number    Int            @unique
+  email           String         @unique
   hashed_password String
-  address String
-  district String
-  city String
-  state String
-  pincode Int
-  cart Service_Cart[]
-  bill Bill[]
+  address         String
+  district        String
+  city            String
+  state           String
+  pincode         Int
+  cart            Service_Cart[]
+  bill            Bill[]
 }
 
-model Service_Cart{
-  customer User @relation(fields: [card_id], references: [user_id])
-  card_id Int @id @default(autoincrement())
+model Service_Cart {
+  customer      User      @relation(fields: [card_id], references: [user_id])
+  card_id       Int       @id @default(autoincrement())
+  services      Service[] @relation("CartServices")
   current_total Float
 }
 
 model Bill {
-  bill_number Int @id @default(autoincrement())
-  customer User @relation(fields: [customer_id], references: [user_id])
+  bill_number Int       @id @default(autoincrement())
+  customer    User      @relation(fields: [customer_id], references: [user_id])
   customer_id Int
-  services Service[]
-  service_id Int  @unique
-  date DateTime 
+  services    Service[]
+  service_id  Int       @unique
+  date        DateTime
   bill_amount Float
 }
 
 model Event_Vendor {
-  event_vendor_id Int @id @default(autoincrement())
-  first_name String
-  last_name String
-  business_number Int @unique
-  business_email String
-  hashed_password String
-  GST_number String @unique
+  event_vendor_id  Int       @id @default(autoincrement())
+  first_name       String
+  last_name        String
+  business_number  Int       @unique
+  business_email   String
+  hashed_password  String
+  GST_number       String    @unique
   business_address String
-  district String
-  city String
-  state String
-  pincode Int
-  services Service[]
+  district         String
+  city             String
+  state            String
+  pincode          Int
+  services         Service[]
 }
 
 model Service {
-  service_id Int @id @default(autoincrement())
-  bills Bill @relation(fields: [service_id], references: [service_id])
-  event_vendor Event_Vendor @relation(fields: [event_vendor_id], references: [event_vendor_id])
-  event_vendor_id Int
-  service_name String
+  service_id          Int            @id @default(autoincrement())
+  bills               Bill           @relation(fields: [service_id], references: [service_id])
+  event_vendor        Event_Vendor   @relation(fields: [event_vendor_id], references: [event_vendor_id])
+  event_vendor_id     Int
+  service_name        String
   service_description String
-  charges Float
-  categories Category[]
+  charges             Float
+  categories          Category[]
+  carts               Service_Cart[] @relation("CartServices")
 }
 
 model Category {
-  category_id Int @id @default(autoincrement())
-  services Service @relation(fields: [service_id], references: [service_id])
-  service_id Int
-} 
+  category_id Int     @id @default(autoincrement())
+  services    Service @relation(fields: [service_id], references: [service_id])
+  service_id  Int
+}

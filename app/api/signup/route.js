@@ -1,10 +1,11 @@
 import prisma from "@/utils";
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 export async function POST(request) {
   try {
     const checker = prisma.user.findUnique({
-      where: { business_email: request.business_email },
+      where: { business_email: request.body.business_email },
     });
 
     if (checker) {
@@ -13,18 +14,21 @@ export async function POST(request) {
         { status: 409 }
       );
     }
+
+    const hashed_password = await bcrypt.hash(request.body.password);
+
     prisma.user.create({
       data: {
-        first_name: request.first_name,
-        last_name: request.last_name,
-        phone_number: request.phone_number,
-        email: request.email,
-        hashed_password: "",
-        address: request.address,
-        district: request.district,
-        city: request.city,
-        state: request.state,
-        pincode: request.pincode,
+        first_name: request.body.first_name,
+        last_name: request.body.last_name,
+        phone_number: request.body.phone_number,
+        email: request.body.email,
+        hashed_password: hashed_password,
+        address: request.body.address,
+        district: request.body.district,
+        city: request.body.city,
+        state: request.body.state,
+        pincode: request.body.pincode,
       },
     });
     return NextResponse.json(

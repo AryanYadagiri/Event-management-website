@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const searchParams = request.nextUrl.searchParams
     const category = searchParams.get("category");
     const whereClause = category === "all" ? {} : { categories: category };
     const cursor = searchParams.get("cursor");
