@@ -59,7 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    jwt({ token, user }) {
       if (user) {
         token.first_name = user.first_name;
         token.last_name = user.last_name;
@@ -67,11 +67,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
+    session({ session, token }) {
+      session.user.id = token.id;
+      return session;
+    },
   },
   pages: {
     signIn: "/login",
-    error: "/login",
-    signOut: "/login",
   },
   session: {
     strategy: "jwt",
