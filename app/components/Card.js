@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ExploreButton from "./ExploreButton";
 
 export function Card() {
   return (
@@ -23,9 +24,7 @@ export function Card() {
         </p>
         <div className="flex items-center justify-between">
           <span className="font-bold text-lg">$19.99</span>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            Buy Now
-          </button>
+          <ExploreButton/>
         </div>
       </div>
     </div>

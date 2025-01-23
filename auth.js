@@ -14,6 +14,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
+          console.log('Hello');
           let user;
           if (credentials.userType === "regular") {
             user = await prisma.user.findUnique({
@@ -30,6 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
 
           if (!user) {
+            console.log('user this is',user);
             return NextResponse.json(
               { message: "Invalid email." },
               { status: 401 }
