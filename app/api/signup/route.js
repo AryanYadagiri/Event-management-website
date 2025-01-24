@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs";
 
 export async function POST(request) {
   try {
-    const checker = prisma.user.findUnique({
-      where: { business_email: request.body.business_email },
+    const checker = await prisma.user.findUnique({
+      where: { email: request.body.email },
     });
-
+    console.log(checker)
     if (checker) {
       return NextResponse.json(
         { message: "Email already used." },
@@ -17,7 +17,7 @@ export async function POST(request) {
 
     const hashed_password = await bcrypt.hash(request.body.password);
 
-    prisma.user.create({
+    await prisma.user.create({
       data: {
         first_name: request.body.first_name,
         last_name: request.body.last_name,

@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/utils";
-import { NextResponse } from "next/server";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -13,50 +12,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         userType: { label: "User Type", type: "text" },
       },
       authorize: async (credentials) => {
-        try {
-          console.log('Hello');
-          let user;
-          if (credentials.userType === "regular") {
-            user = await prisma.user.findUnique({
-              where: {
-                email: credentials.email,
-              },
-            });
-          } else if (credentials.userType === "vendor") {
-            const user = await prisma.event_Vendor.findUnique({
-              where: {
-                email: credentials.email,
-              },
-            });
-          }
-
-          if (!user) {
-            console.log('user this is',user);
-            return NextResponse.json(
-              { message: "Invalid email." },
-              { status: 401 }
-            );
-          }
-
-          const check = await bcrypt.compare(
-            credentials.password,
-            user.hashed_password
-          );
-
-          if (!check) {
-            return NextResponse.json(
-              { message: "Invalid password." },
-              { status: 401 }
-            );
-          }
-          delete user.hashed_password;
-          return user;
-        } catch (error) {
-          return NextResponse.json(
-            { message: "Internal server error" },
-            { status: 500 }
-          );
+        let user;
+        if (credentials.userType === "regular") {
+          user = await prisma.user.findUnique({
+            where: {
+              email: credentials.email,
+            },
+          });
+        } else if (credentials.userType === "vendor") {
+          user = await prisma.event_Vendor.findUnique({
+            where: {
+              email: credentials.email,
+            },
+          });
         }
+
+        if (!user) {
+          return null;
+        }
+
+        const check = await bcrypt.compare(
+          credentials.password,
+          user.hashed_password
+        );
+
+        if (!check) {
+          return null;
+        }
+
+        delete user.hashed_password;
+        return user;
       },
     }),
   ],
