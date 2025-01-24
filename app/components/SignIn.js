@@ -1,42 +1,20 @@
-import { signIn } from "@/auth";
+"use client";
+
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function SignIn() {
-  return (
-    <form
-      action={async (formData) => {
-        "use server";
-        try {
-          // const callbackUrl = `${window.location.protocol}//${window.location.host}`;
-          const response = await signIn("credentials", {
-            email: formData.get("email"),
-            password: formData.get("password"),
-            userType: formData.get("userType"),
-            redirect: false
-          });
+  const { data: session } = useSession();
 
-          console.log("response", response);
-          if (response?.error) {
-            // Handle error from NextAuth response
-            console.error('Error:', response.error); // You can display this to the user
-            alert('Login failed: ' + response.error);
-          } else {
-            console.log('Login successful');
-          }
-        } catch (error) {
-          console.error("Error during sign-in", error);
-        }
-      }}
-    >
-      <label>
-        Email
-        <input name="email" type="email" />
-      </label>
-      <label>
-        Password
-        <input name="password" type="password" />
-      </label>
-      <input name="userType" type="text" defaultValue="regular" />
-      <button>Sign In</button>
-    </form>
-  );
+  if (session) {
+    return (
+      <>
+      {session?.user?.name} 
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+  }
+
+  return (
+    <button onClick={() => signIn()}>Sign in</button>
+  )
 }
