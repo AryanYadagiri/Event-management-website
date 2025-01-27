@@ -4,13 +4,14 @@ import { auth } from "@/auth";
 
 export async function POST(request) {
   try {
+    const req = await request.json();
     const session = await auth();
     await prisma.service.create({
       data: {
         event_vendor_id: session.user.id,
-        service_name: request.body.service_name,
-        service_description: request.body.service_description,
-        charges: request.body.charges,
+        service_name: req.service_name,
+        service_description: req.service_description,
+        charges: req.charges,
       },
     });
 
@@ -28,20 +29,21 @@ export async function POST(request) {
 
 export async function PUT(request) {
   try {
-    if (request.body.new_service_name) {
+    const req = await request.json();
+    if (req.new_service_name) {
       await prisma.service.update({
-        where: { service_id: request.body.service_id },
-        data: { service_name: request.body.new_service_name },
+        where: { service_id: req.service_id },
+        data: { service_name: req.new_service_name },
       });
-    } else if (request.body.new_service_description) {
+    } else if (req.new_service_description) {
       await prisma.service.update({
-        where: { service_id: request.body.service_id },
-        data: { service_description: request.body.new_service_description },
+        where: { service_id: req.service_id },
+        data: { service_description: req.new_service_description },
       });
-    } else if (request.body.new_charges) {
+    } else if (req.new_charges) {
       await prisma.service.update({
-        where: { service_id: request.body.service_id },
-        data: { charges: request.body.new_charges },
+        where: { service_id: req.service_id },
+        data: { charges: req.new_charges },
       });
       return NextResponse.json({ message: "Service updated" }, { status: 200 });
     }
@@ -55,8 +57,9 @@ export async function PUT(request) {
 
 export async function DELETE(request) {
   try {
+    const req = await request.json();
     await prisma.service.delete({
-      where: { service_id: request.body.service_id },
+      where: { service_id: req.service_id },
     });
     return NextResponse.json({ message: "Service deleted" }, { status: 204 });
   } catch (error) {

@@ -3,8 +3,9 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
+    const req = await request.json();
     const checker = prisma.event_Vendor.findUnique({
-      where: { business_email: request.body.business_email },
+      where: { business_email: req.business_email },
     });
 
     if (checker) {
@@ -14,21 +15,21 @@ export async function POST(request) {
       );
     }
 
-    const hashed_password = await bcrypt.hash(request.body.password);
+    const hashed_password = await bcrypt.hash(req.password);
 
     prisma.event_Vendor.create({
       data: {
-        first_name: request.body.first_name,
-        last_name: request.body.last_name,
-        business_number: request.body.business_number,
-        business_email: request.body.business_email,
+        first_name: req.first_name,
+        last_name: req.last_name,
+        business_number: req.business_number,
+        business_email: req.business_email,
         hashed_password: hashed_password,
-        GST_number: request.body.GST_number,
-        business_address: request.body.business_address,
-        district: request.body.district,
-        city: request.body.city,
-        state: request.body.state,
-        pincode: request.body.pincode,
+        GST_number: req.GST_number,
+        business_address: req.business_address,
+        district: req.district,
+        city: req.city,
+        state: req.state,
+        pincode: req.pincode,
       },
     });
     return NextResponse.json(
