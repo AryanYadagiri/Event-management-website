@@ -1,3 +1,4 @@
+import Image from "next/image";
 import DeleteButton from "./DeleteButton";
 
 export default function Dashboard() {
@@ -10,6 +11,7 @@ export default function Dashboard() {
               <th className="min-w-[140px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase">
                 ID
               </th>
+              <th className="min-w-[140px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase"></th>
               <th className="min-w-[180px] px-3 py-2 text-start text-sm font-semibold tracking-wider text-neutral-700 uppercase">
                 Service Name
               </th>
@@ -25,13 +27,24 @@ export default function Dashboard() {
               <th className="min-w-[100px] p-3 py-2 text-end text-sm font-semibold tracking-wider text-neutral-700 uppercase"></th>
             </tr>
           </thead>
-
           <tbody>
             <tr className="border-b border-neutral-100 hover:bg-neutral-50">
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4585
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-11-15 09:30</td>
+              <td>
+                {" "}
+                <Image
+                  className="h-7 w-7"
+                  src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+                  alt="Product Image"
+                  width={500}
+                  height={500}
+                />
+              </td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-11-15 09:30
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -43,18 +56,18 @@ export default function Dashboard() {
               <td className="p-3 text-start">
                 Unable to Connect to Wi-Fi on Laptop
               </td>
-              <td className="p-3 font-medium text-green-500">
-                10000
-              </td>
+              <td className="p-3 font-medium text-green-500">10000</td>
               <td className="p-3 text-end font-medium">
-                <DeleteButton/>
+                <DeleteButton />
               </td>
             </tr>
             <tr className="border-b border-neutral-100 hover:bg-neutral-50">
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4584
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-11-10 14:15</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-11-10 14:15
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -97,7 +110,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4583
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-11-05 17:45</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-11-05 17:45
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -140,7 +155,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4582
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-10-30 08:00</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-10-30 08:00
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -183,7 +200,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4581
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-10-25 20:20</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-10-25 20:20
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -226,7 +245,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4580
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-11-10 14:15</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-11-10 14:15
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -235,7 +256,9 @@ export default function Dashboard() {
                   Helen Thompson
                 </a>
               </td>
-              <td className="p-3 text-start">Payroll System Access Denied Error</td>
+              <td className="p-3 text-start">
+                Payroll System Access Denied Error
+              </td>
               <td className="p-3 font-medium">
                 <div className="inline-block rounded-full bg-orange-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-orange-800">
                   Under Investigation
@@ -267,7 +290,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4579
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-10-15 09:15</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-10-15 09:15
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -308,7 +333,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4578
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-10-10 16:30</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-10-10 16:30
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -351,7 +378,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4577
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-10-05 14:00</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-10-05 14:00
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"
@@ -394,7 +423,9 @@ export default function Dashboard() {
               <td className="p-3 text-start font-semibold text-neutral-600">
                 RN#4576
               </td>
-              <td className="p-3 text-start text-neutral-600">2023-10-01 11:45</td>
+              <td className="p-3 text-start text-neutral-600">
+                2023-10-01 11:45
+              </td>
               <td className="p-3 font-medium text-neutral-600">
                 <a
                   href="javascript:void(0)"

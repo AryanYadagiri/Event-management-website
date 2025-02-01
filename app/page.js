@@ -3,6 +3,7 @@ import { Card } from "./components/Card";
 import AddButton from "./components/AddButton";
 import UpdateButton from "./components/UpdateButton";
 import Dashboard from "./components/Dashboard";
+import Modal from "./components/Modal";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <DeleteButton />
       <AddButton />
       <UpdateButton />
+      {/* <Modal /> */}
       <Dashboard/>
     </>
   );
