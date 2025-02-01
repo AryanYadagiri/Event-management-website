@@ -2,6 +2,7 @@ import DeleteButton from "./components/DeleteButton";
 import { Card } from "./components/Card";
 import AddButton from "./components/AddButton";
 import UpdateButton from "./components/UpdateButton";
+import Dashboard from "./components/Dashboard";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <DeleteButton />
       <AddButton />
       <UpdateButton />
+      <Dashboard/>
     </>
   );
 }
