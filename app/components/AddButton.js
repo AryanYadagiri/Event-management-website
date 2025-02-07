@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function AddButton() {
-  const [showModal, setShowModal] = useState<String>("false");
+  const [showModal, setShowModal] = useState(false);
   const handleAdd = () => {
     setShowModal(12);
   };
