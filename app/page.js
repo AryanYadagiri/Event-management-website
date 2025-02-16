@@ -4,6 +4,7 @@ import AddButton from "./components/AddButton";
 import Dashboard from "./components/Dashboard";
 import Tracker from "./components/Tracker";
 import Cart from "./components/Cart";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -16,6 +17,8 @@ export default function Home() {
       <Dashboard />
       <Tracker />
       <Cart />
+      
+      <Footer/>
     </>
   );
 }
