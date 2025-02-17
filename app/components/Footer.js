@@ -56,7 +56,7 @@ export default function () {
         </a>
       </div>
       <p className="text-center text-gray-700 font-medium">
-        &copy; 2022 Company Ltd. All rights reservered.
+        &copy; 2025 Company Ltd. All rights reservered.
       </p>
     </footer>
   );
