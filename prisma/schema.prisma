@@ -21,7 +21,6 @@ model User {
   email           String         @unique
   hashed_password String
   address         String
-  district        String
   city            String
   state           String
   pincode         Int

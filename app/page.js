@@ -4,7 +4,6 @@ import { Card } from "./components/Card";
 import Footer from "./components/Footer";
 
 export default function Home() {
-  const res = axios.get("/api/services");
   return (
     <>
       <Navbar />
