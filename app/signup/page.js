@@ -1,5 +1,7 @@
 "use client";
-import { useFormik, Formik, Form } from "formik";
+import { Formik } from "formik";
+import { RegularValidation } from "@/schemas";
+
 const initialValues = {
   first_name: "",
   last_name: "",
@@ -27,6 +29,7 @@ export default function Page() {
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={RegularValidation}
       onSubmit={(values) => {
         console.log(JSON.stringify(values, null, 2));
       }}
@@ -79,7 +82,9 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:col-span-5">
-                          <label htmlFor="confirm_password">Confirm Password</label>
+                          <label htmlFor="confirm_password">
+                            Confirm Password
+                          </label>
                           <input
                             type="text"
                             name="Password"
@@ -165,9 +170,7 @@ export default function Page() {
                         </div>
                         <div className="md:col-span-5 text-right">
                           <div className="inline-flex items-end">
-                            <button
-                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            >
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                               Submit
                             </button>
                           </div>
