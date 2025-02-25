@@ -1,6 +1,7 @@
 "use client";
 import { Formik } from "formik";
 import { RegularValidation } from "@/schemas";
+import axios from "axios";
 
 const initialValues = {
   first_name: "",
@@ -15,9 +16,6 @@ const initialValues = {
   pincode: "",
 };
 
-// function onSubmit(values) {
-//   alert(JSON.stringify(values, null, 2));
-// }
 export default function Page() {
   //   const { values, handleSubmit, handleChange, handleBlur } = useFormik({
   //     initialValues: initialValues,
@@ -25,6 +23,7 @@ export default function Page() {
   //       alert(JSON.stringify(values, null, 2));
   //     },
   //   });
+  const API = "localhost:3000/api/signup";
 
   return (
     <Formik
@@ -32,9 +31,21 @@ export default function Page() {
       validationSchema={RegularValidation}
       onSubmit={(values) => {
         console.log(JSON.stringify(values, null, 2));
+        // const response = axios.post(API, {
+        //   first_name: values.first_name,
+        //   last_name: values.last_name,
+        //   password: values.password,
+        //   phone_number: values.password,
+        //   email: values.email,
+        //   address: values.address,
+        //   city: values.city,
+        //   state: values.state,
+        //   pincode: values.pincode,
+        // });
+        // console.log(response);
       }}
     >
-      {({ values, errors, handleSubmit, handleChange }) => (
+      {({ values, errors, touched, handleSubmit, handleChange }) => (
         <form className="text-black" onSubmit={handleSubmit}>
           <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
             <div className="container max-w-screen-lg mx-auto">
@@ -58,6 +69,7 @@ export default function Page() {
                             value={values.first_name}
                             onChange={handleChange}
                           />
+                          {errors.first_name && touched.first_name?(<p className="text-red-700">{errors.first_name}</p>):null}
                         </div>
                         <div className="md:col-span-2">
                           <label htmlFor="last_name">Last Name</label>
@@ -69,17 +81,23 @@ export default function Page() {
                             value={values.last_name}
                             onChange={handleChange}
                           />
+                          {errors.last_name && touched.last_name ? (
+                            <p className="text-red-700">{errors.last_name}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-5">
                           <label htmlFor="password">Password</label>
                           <input
                             type="password"
-                            name="confirm_password"
-                            id="confirm_password"
+                            name="password"
+                            id="password"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={values.confirm_password}
+                            value={values.password}
                             onChange={handleChange}
                           />
+                          {errors.password && touched.password ? (
+                            <p className="text-red-700">{errors.password}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-5">
                           <label htmlFor="confirm_password">
@@ -87,12 +105,15 @@ export default function Page() {
                           </label>
                           <input
                             type="text"
-                            name="Password"
-                            id="Password"
+                            name="confirm_password"
+                            id="confirm_password"
                             className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            value={values.password}
+                            value={values.confirm_password}
                             onChange={handleChange}
                           />
+                          {errors.confirm_password && touched.confirm_password ? (
+                            <p className="text-red-700">{errors.confirm_password}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-3">
                           <label htmlFor="email">Email Address</label>
@@ -105,9 +126,12 @@ export default function Page() {
                             onChange={handleChange}
                             placeholder="email@domain.com"
                           />
+                          {errors.email && touched.email ? (
+                            <p className="text-red-700">{errors.email}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-2">
-                          <label htmlFor="">Phone Number</label>
+                          <label htmlFor="phone_number">Phone Number</label>
                           <input
                             type="text"
                             name="phone_number"
@@ -116,6 +140,9 @@ export default function Page() {
                             value={values.phone_number}
                             onChange={handleChange}
                           />
+                          {errors.phone_number && touched.phone_number ? (
+                            <p className="text-red-700">{errors.phone_number}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-3">
                           <label htmlFor="address">Address / Street</label>
@@ -128,6 +155,9 @@ export default function Page() {
                             onChange={handleChange}
                             placeholder=""
                           />
+                          {errors.address && touched.address ? (
+                            <p className="text-red-700">{errors.address}</p>
+                          ) : null}
                         </div>
 
                         <div className="md:col-span-2">
@@ -141,6 +171,9 @@ export default function Page() {
                             onChange={handleChange}
                             placeholder=""
                           />
+                          {errors.city && touched.city ? (
+                            <p className="text-red-700">{errors.city}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-2">
                           <label htmlFor="state">State</label>
@@ -153,6 +186,9 @@ export default function Page() {
                               value={values.state}
                               onChange={handleChange}
                             />
+                            {errors.state && touched.state ? (
+                            <p className="text-red-700">{errors.state}</p>
+                          ) : null}
                           </div>
                         </div>
 
@@ -167,10 +203,13 @@ export default function Page() {
                             value={values.pincode}
                             onChange={handleChange}
                           />
+                          {errors.pincode && touched.pincode ? (
+                            <p className="text-red-700">{errors.pincode}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-5 text-right">
                           <div className="inline-flex items-end">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
                               Submit
                             </button>
                           </div>
