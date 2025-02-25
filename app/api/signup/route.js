@@ -5,13 +5,15 @@ import bcrypt from "bcryptjs";
 export async function POST(request) {
   try {
     const req = await request.json();
+    // console.log(req)
     const check1 = await prisma.user.findUnique({
       where: { email: req.email },
     });
+    // console.log("done")
     const check2 = await prisma.user.findUnique({
-      where: { phone_number: req.phone_number },
+      where: { phone_number: parseInt(req.phone_number) },
     });
-    
+    // console.log("done")
     if (check1) {
       return NextResponse.json(
         { message: "Email already used." },
@@ -30,14 +32,14 @@ export async function POST(request) {
       data: {
         first_name: req.first_name,
         last_name: req.last_name,
-        phone_number: req.phone_number,
+        phone_number: Number(req.phone_number),
         email: req.email,
         hashed_password: hashed_password,
         address: req.address,
         district: req.district,
         city: req.city,
         state: req.state,
-        pincode: req.pincode,
+        pincode: Number(req.pincode),
       },
     });
     return NextResponse.json(

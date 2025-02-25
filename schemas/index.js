@@ -20,6 +20,6 @@ export const RegularValidation = Yup.object({
     .oneOf([Yup.ref("password"), null], "Password must match"),
   address: Yup.string().max(50).required("Please enter your address"),
   city: Yup.string().max(20).required("Please enter your city"),
-  State: Yup.string().max(20).required("Please enter your state"),
+  state: Yup.string().max(20).required("Please enter your state"),
   pincode: Yup.string().min(6).max(6).required("Please enter your pincode"),
 });

@@ -23,7 +23,7 @@ export default function Page() {
   //       alert(JSON.stringify(values, null, 2));
   //     },
   //   });
-  const API = "localhost:3000/api/signup";
+  const API = "http://localhost:3000/api/signup";
 
   return (
     <Formik
@@ -31,18 +31,18 @@ export default function Page() {
       validationSchema={RegularValidation}
       onSubmit={(values) => {
         console.log(JSON.stringify(values, null, 2));
-        // const response = axios.post(API, {
-        //   first_name: values.first_name,
-        //   last_name: values.last_name,
-        //   password: values.password,
-        //   phone_number: values.password,
-        //   email: values.email,
-        //   address: values.address,
-        //   city: values.city,
-        //   state: values.state,
-        //   pincode: values.pincode,
-        // });
-        // console.log(response);
+        const response = axios.post(API, {
+          first_name: values.first_name,
+          last_name: values.last_name,
+          password: values.password,
+          phone_number: values.phone_number,
+          email: values.email,
+          address: values.address,
+          city: values.city,
+          state: values.state,
+          pincode: values.pincode,
+        });
+        console.log(response);
       }}
     >
       {({ values, errors, touched, handleSubmit, handleChange }) => (
