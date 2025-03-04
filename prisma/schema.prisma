@@ -45,7 +45,7 @@ model Bill {
   bill_amount Float
 }
 
-model Event_Vendor {
+model EventVendor {
   event_vendor_id  Int       @id @default(autoincrement())
   first_name       String
   last_name        String
@@ -54,7 +54,6 @@ model Event_Vendor {
   hashed_password  String
   GST_number       String    @unique
   business_address String
-  district         String
   city             String
   state            String
   pincode          Int
@@ -64,7 +63,7 @@ model Event_Vendor {
 model Service {
   service_id          Int            @id @default(autoincrement())
   bills               Bill           @relation(fields: [service_id], references: [service_id])
-  event_vendor        Event_Vendor   @relation(fields: [event_vendor_id], references: [event_vendor_id])
+  event_vendor        EventVendor   @relation(fields: [event_vendor_id], references: [event_vendor_id])
   event_vendor_id     Int
   service_name        String
   service_description String

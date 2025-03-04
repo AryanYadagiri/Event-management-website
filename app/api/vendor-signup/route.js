@@ -1,13 +1,20 @@
 import prisma from "@/utils";
+import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
     const req = await request.json();
-    const checker = prisma.event_Vendor.findUnique({
+    console.log(req);
+    if (!req) {
+      throw new Error("Request body is empty");
+    }
+    const checker = await prisma.eventVendor.findUnique({
       where: { business_email: req.business_email },
     });
+    console.log('checker', checker);
 
+    console.log("done");
     if (checker) {
       return NextResponse.json(
         { message: "Email already used." },
@@ -15,32 +22,55 @@ export async function POST(request) {
       );
     }
 
-    const hashed_password = await bcrypt.hash(req.password);
+    const hashed_password = await bcrypt.hash(req.password, 10);
 
-    prisma.event_Vendor.create({
+    await prisma.eventVendor.create({
       data: {
         first_name: req.first_name,
         last_name: req.last_name,
-        business_number: req.business_number,
+        business_number: Number(req.business_number),
         business_email: req.business_email,
         hashed_password: hashed_password,
         GST_number: req.GST_number,
         business_address: req.business_address,
-        district: req.district,
         city: req.city,
         state: req.state,
-        pincode: req.pincode,
+        pincode: Number(req.pincode),
       },
     });
     return NextResponse.json(
       { message: "Registration successful" },
       { status: 201 }
     );
-  } catch (error) {
+  } catch(error)  {
+    console.log(error);
     return NextResponse.json(
-      console.log(error),
       { message: "Internal server error" },
       { status: 500 }
     );
   }
+  // try {
+  //   const req = await request.json();
+  //   console.log(req);
+  //   const checker = await prisma.event_Vendor.findUnique({
+  //     where: { business_email: req.business_email },
+  //   });
+  //   console.log('checker', checker);
+  //   // const checker = true;
+  //   console.log("done");
+  //   if (checker) {
+  //     return NextResponse.json(
+  //       { message: "Email already used." },
+  //       { status: 409 }
+  //     );
+  //   }
+  //   return NextResponse.json(
+  //     { message: "Email no used." },
+  //     { status: 201 }
+  //   );
+  // } catch (error) {
+  //   console.log(error)
+  // }
 }
+
+
