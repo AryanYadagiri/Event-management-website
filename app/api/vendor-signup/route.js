@@ -43,7 +43,7 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch(error)  {
-    console.log(error);
+    console.error("Error in vendor signup:", error.message || "Unknown error");
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }

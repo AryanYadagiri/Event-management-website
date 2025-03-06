@@ -50,7 +50,7 @@ model EventVendor {
   first_name       String
   last_name        String
   business_number  Int       @unique
-  business_email   String
+  business_email   String    @unique
   hashed_password  String
   GST_number       String    @unique
   business_address String
