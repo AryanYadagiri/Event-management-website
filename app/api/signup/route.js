@@ -36,7 +36,6 @@ export async function POST(request) {
         email: req.email,
         hashed_password: hashed_password,
         address: req.address,
-        district: req.district,
         city: req.city,
         state: req.state,
         pincode: Number(req.pincode),
