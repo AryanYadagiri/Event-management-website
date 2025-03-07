@@ -12,12 +12,20 @@ export async function POST(request) {
     const checker = await prisma.eventVendor.findUnique({
       where: { business_email: req.business_email },
     });
-    console.log('checker', checker);
-
+    console.log("checker", checker);
+    const check2 = await prisma.eventVendor.findUnique({
+      where: { business_number: req.business_number },
+    });
+    // console.log("done")
     console.log("done");
     if (checker) {
       return NextResponse.json(
         { message: "Email already used." },
+        { status: 409 }
+      );
+    } else if (check2) {
+      return NextResponse.json(
+        { message: "Phone number already used." },
         { status: 409 }
       );
     }
@@ -42,35 +50,11 @@ export async function POST(request) {
       { message: "Registration successful" },
       { status: 201 }
     );
-  } catch(error)  {
+  } catch (error) {
     console.error("Error in vendor signup:", error.message || "Unknown error");
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
     );
   }
-  // try {
-  //   const req = await request.json();
-  //   console.log(req);
-  //   const checker = await prisma.event_Vendor.findUnique({
-  //     where: { business_email: req.business_email },
-  //   });
-  //   console.log('checker', checker);
-  //   // const checker = true;
-  //   console.log("done");
-  //   if (checker) {
-  //     return NextResponse.json(
-  //       { message: "Email already used." },
-  //       { status: 409 }
-  //     );
-  //   }
-  //   return NextResponse.json(
-  //     { message: "Email no used." },
-  //     { status: 201 }
-  //   );
-  // } catch (error) {
-  //   console.log(error)
-  // }
 }
-
-

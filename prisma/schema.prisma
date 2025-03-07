@@ -17,13 +17,13 @@ model User {
   user_id         Int            @id @default(autoincrement())
   first_name      String
   last_name       String
-  phone_number    Int            @unique
+  phone_number    String         @unique
   email           String         @unique
   hashed_password String
   address         String
   city            String
   state           String
-  pincode         Int
+  pincode         String
   cart            Service_Cart[]
   bill            Bill[]
 }
@@ -49,21 +49,21 @@ model EventVendor {
   event_vendor_id  Int       @id @default(autoincrement())
   first_name       String
   last_name        String
-  business_number  Int       @unique
+  business_number  String    @unique
   business_email   String    @unique
   hashed_password  String
   GST_number       String    @unique
   business_address String
   city             String
   state            String
-  pincode          Int
+  pincode          String
   services         Service[]
 }
 
 model Service {
   service_id          Int            @id @default(autoincrement())
   bills               Bill           @relation(fields: [service_id], references: [service_id])
-  event_vendor        EventVendor   @relation(fields: [event_vendor_id], references: [event_vendor_id])
+  event_vendor        EventVendor    @relation(fields: [event_vendor_id], references: [event_vendor_id])
   event_vendor_id     Int
   service_name        String
   service_description String

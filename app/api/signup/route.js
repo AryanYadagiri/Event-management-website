@@ -11,7 +11,7 @@ export async function POST(request) {
     });
     // console.log("done")
     const check2 = await prisma.user.findUnique({
-      where: { phone_number: parseInt(req.phone_number) },
+      where: { phone_number: req.phone_number },
     });
     // console.log("done")
     if (check1) {
@@ -32,13 +32,13 @@ export async function POST(request) {
       data: {
         first_name: req.first_name,
         last_name: req.last_name,
-        phone_number: Number(req.phone_number),
+        phone_number: req.phone_number,
         email: req.email,
         hashed_password: hashed_password,
         address: req.address,
         city: req.city,
         state: req.state,
-        pincode: Number(req.pincode),
+        pincode: req.pincode,
       },
     });
     return NextResponse.json(
@@ -46,7 +46,7 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
-    console.log(error)
+    console.error("Error in signup:", error.message || "Unknown error");
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }

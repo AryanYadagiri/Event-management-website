@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "EventVendor" ALTER COLUMN "business_number" SET DATA TYPE TEXT,
+ALTER COLUMN "pincode" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "phone_number" SET DATA TYPE TEXT,
+ALTER COLUMN "pincode" SET DATA TYPE TEXT;

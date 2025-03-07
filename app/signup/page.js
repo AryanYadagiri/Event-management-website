@@ -55,6 +55,15 @@ export default function Page() {
                     <div className="text-gray-600">
                       <p className="font-medium text-lg">Registration Form</p>
                       <p>Please fill out all the fields.</p>
+                      <p className="mt-10 text-sm font-light text-black-600 dark:text-black-400">
+                        Already have an account ?{" "}
+                        <a
+                          href="/login"
+                          className="font-bold text-black-600 hover:underline dark:text-black-500"
+                        >
+                          Login here
+                        </a>
+                      </p>
                     </div>
 
                     <div className="lg:col-span-2">
@@ -69,7 +78,9 @@ export default function Page() {
                             value={values.first_name}
                             onChange={handleChange}
                           />
-                          {errors.first_name && touched.first_name?(<p className="text-red-700">{errors.first_name}</p>):null}
+                          {errors.first_name && touched.first_name ? (
+                            <p className="text-red-700">{errors.first_name}</p>
+                          ) : null}
                         </div>
                         <div className="md:col-span-2">
                           <label htmlFor="last_name">Last Name</label>
@@ -111,8 +122,11 @@ export default function Page() {
                             value={values.confirm_password}
                             onChange={handleChange}
                           />
-                          {errors.confirm_password && touched.confirm_password ? (
-                            <p className="text-red-700">{errors.confirm_password}</p>
+                          {errors.confirm_password &&
+                          touched.confirm_password ? (
+                            <p className="text-red-700">
+                              {errors.confirm_password}
+                            </p>
                           ) : null}
                         </div>
                         <div className="md:col-span-3">
@@ -141,7 +155,9 @@ export default function Page() {
                             onChange={handleChange}
                           />
                           {errors.phone_number && touched.phone_number ? (
-                            <p className="text-red-700">{errors.phone_number}</p>
+                            <p className="text-red-700">
+                              {errors.phone_number}
+                            </p>
                           ) : null}
                         </div>
                         <div className="md:col-span-3">
@@ -187,8 +203,8 @@ export default function Page() {
                               onChange={handleChange}
                             />
                             {errors.state && touched.state ? (
-                            <p className="text-red-700">{errors.state}</p>
-                          ) : null}
+                              <p className="text-red-700">{errors.state}</p>
+                            ) : null}
                           </div>
                         </div>
 
@@ -207,9 +223,13 @@ export default function Page() {
                             <p className="text-red-700">{errors.pincode}</p>
                           ) : null}
                         </div>
+
                         <div className="md:col-span-5 text-right">
                           <div className="inline-flex items-end">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                            <button
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                              type="submit"
+                            >
                               Submit
                             </button>
                           </div>
