@@ -36,14 +36,14 @@ export async function POST(request) {
       data: {
         first_name: req.first_name,
         last_name: req.last_name,
-        business_number: Number(req.business_number),
+        business_number: req.business_number,
         business_email: req.business_email,
         hashed_password: hashed_password,
         GST_number: req.GST_number,
         business_address: req.business_address,
         city: req.city,
         state: req.state,
-        pincode: Number(req.pincode),
+        pincode: req.pincode,
       },
     });
     return NextResponse.json(

@@ -1,12 +1,9 @@
 // import Logout from "./Logout";
-import { auth } from "@/auth";
-import { useSession } from "next-auth/react";
+
+import AuthButton from "./AuthButton";
 
 export default function Navbar() {
-  // const isAuthenticated = auth();
-  // console.log(isAuthenticated)
-  const abc = useSession();
-  console.log(abc);
+  
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -17,7 +14,7 @@ export default function Navbar() {
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             className="h-8"
-            alt="Flowbite Logo"
+            alt="Website Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Evently
@@ -74,7 +71,8 @@ export default function Navbar() {
               placeholder="Search..."
             />
           </div>
-          {/* {isAuthenticated?<Logout />:<p>hii</p>} */}
+          {/* {session?.user?.email ? <Logout /> : <p>hii</p>} */}
+          <AuthButton />
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"

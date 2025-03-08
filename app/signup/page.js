@@ -1,6 +1,7 @@
 "use client";
 import { Formik } from "formik";
 import { RegularValidation } from "@/schemas";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 const initialValues = {
@@ -23,15 +24,16 @@ export default function Page() {
   //       alert(JSON.stringify(values, null, 2));
   //     },
   //   });
+  const router = useRouter();
   const API = "http://localhost:3000/api/signup";
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={RegularValidation}
-      onSubmit={(values) => {
+      onSubmit={async (values) => {
         console.log(JSON.stringify(values, null, 2));
-        const response = axios.post(API, {
+        const response = await axios.post(API, {
           first_name: values.first_name,
           last_name: values.last_name,
           password: values.password,
@@ -42,7 +44,10 @@ export default function Page() {
           state: values.state,
           pincode: values.pincode,
         });
-        console.log(response);
+        // console.log('response',response?.data?.message);
+        if (response.status === 201) {
+          router.push("/login");
+        }
       }}
     >
       {({ values, errors, touched, handleSubmit, handleChange }) => (

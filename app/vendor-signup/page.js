@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import { VendorValidation } from "@/schemas";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 const initialValues = {
@@ -18,24 +19,28 @@ const initialValues = {
 };
 
 export default function Page() {
+  const router = useRouter();
   const API = "http://localhost:3000/api/vendor-signup";
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
-        const response = axios.post(API, {
-          first_name: values.first_name,
-          last_name: values.last_name,
-          password: values.password,
-          business_number: values.phone_number,
-          business_email: values.email,
-          GST_number: values.GST_number,
-          business_address: values.address,
-          city: values.city,
-          state: values.state,
-          pincode: values.pincode,
-        });
-        console.log(response);
+      const response = axios.post(API, {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        password: values.password,
+        business_number: values.phone_number,
+        business_email: values.email,
+        GST_number: values.GST_number,
+        business_address: values.address,
+        city: values.city,
+        state: values.state,
+        pincode: values.pincode,
+      });
+      // console.log(response);
+      if (response.status === 201) {
+        router.push("/login");
+      }
     },
     validationSchema: VendorValidation,
   });

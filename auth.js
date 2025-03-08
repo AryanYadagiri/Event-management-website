@@ -41,6 +41,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         delete user.hashed_password;
+        console.log("user = ", user);
         return user;
       },
     }),
@@ -48,14 +49,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     jwt({ token, user }) {
       if (user) {
+        // console.log(user)
+        token.id = user.id;
         token.first_name = user.first_name;
         token.last_name = user.last_name;
         token.email = user.email;
+        token.user_type = user.user_type;
       }
       return token;
     },
     session({ session, token }) {
       session.user.id = token.id;
+      session.user.user_type = token.user_type;
       return session;
     },
   },

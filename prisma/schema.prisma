@@ -19,6 +19,7 @@ model User {
   last_name       String
   phone_number    String         @unique
   email           String         @unique
+  user_type       UserType       @default(regular)
   hashed_password String
   address         String
   city            String
@@ -51,6 +52,7 @@ model EventVendor {
   last_name        String
   business_number  String    @unique
   business_email   String    @unique
+  user_type        UserType  @default(vendor)
   hashed_password  String
   GST_number       String    @unique
   business_address String
@@ -58,6 +60,11 @@ model EventVendor {
   state            String
   pincode          String
   services         Service[]
+}
+
+enum UserType {
+  regular
+  vendor
 }
 
 model Service {
