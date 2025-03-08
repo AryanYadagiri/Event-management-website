@@ -1,9 +1,12 @@
-import Logout from "./Logout";
+// import Logout from "./Logout";
 import { auth } from "@/auth";
+import { useSession } from "next-auth/react";
 
 export default function Navbar() {
-  const isAuthenticated = auth();
-  console.log(isAuthenticated)
+  // const isAuthenticated = auth();
+  // console.log(isAuthenticated)
+  const abc = useSession();
+  console.log(abc);
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -71,7 +74,7 @@ export default function Navbar() {
               placeholder="Search..."
             />
           </div>
-          {isAuthenticated?<Logout />:<p>hii</p>}
+          {/* {isAuthenticated?<Logout />:<p>hii</p>} */}
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
