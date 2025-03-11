@@ -1,13 +1,31 @@
-export { auth as middleware } from "@/auth";
-// import { NextResponse } from "next/server";
-// import { useSession } from "next-auth/react";
+import { auth } from "@/auth";
+import { NextResponse } from "next/server";
 
-// export function middleware(request) {
+export default auth((request) => {
+  if (!request.auth || request.auth.user.user_type !== "vendor") {
+    if (request.nextUrl.pathname === "/dashboard") {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
 
-//   return NextResponse.redirect(new URL("/login", request.url));
-// }
+  if (
+    request.auth &&
+    request.auth.user.user_type === "vendor" &&
+    request.nextUrl.pathname === "/ "
+  ) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
 
-// export const config = {
-//   matcher: "/dashboard/:path*",
-// };
+  if (
+    request.auth &&
+    (request.nextUrl.pathname === "/login" ||
+      request.nextUrl.pathname === "/signup" ||
+      request.nextUrl.pathname === "/vendor-signup")
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+});
 
+export const config = {
+  matcher: ["/dashboard", "/", "/login", "/signup", "/vendor-signup"],
+};

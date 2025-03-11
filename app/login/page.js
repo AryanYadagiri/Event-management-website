@@ -24,7 +24,7 @@ export default function SignIn() {
       // Redirect user to the homepage or dashboard after successful login
       window.location.href = "/"; // Change this based on your requirements
     } else if (userType === "vendor" && res.status === 200) {
-      // Redirect user to the homepage or dashboard after successful login
+      console.log("vendor login");
       window.location.href = "/dashboard"; // Change this based on your requirements
     }
   };

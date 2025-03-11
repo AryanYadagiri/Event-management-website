@@ -20,9 +20,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
           });
         } else if (credentials.userType === "vendor") {
-          user = await prisma.event_Vendor.findUnique({
+          user = await prisma.eventVendor.findUnique({
             where: {
-              email: credentials.email,
+              business_email: credentials.email,
             },
           });
         }
@@ -41,7 +41,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         delete user.hashed_password;
-        console.log("user = ", user);
+        // console.log("user = ", user);
         return user;
       },
     }),
