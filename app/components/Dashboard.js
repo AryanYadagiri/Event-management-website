@@ -68,7 +68,7 @@ export default function Dashboard() {
                 <UpdateButton />
               </td>
               <td className="p-3 text-end font-medium">
-                <DeleteButton label={"delete"}/>
+                <DeleteButton/>
               </td>
             </tr>
           </tbody>

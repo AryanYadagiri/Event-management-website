@@ -1,7 +1,8 @@
 "use client";
-import { redirect } from "next/navigation";
+
+import VendorNavbar from "../components/VendorNavbar";
+import AddButton from "../components/AddButton";
 import Dashboard from "../components/Dashboard";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Page() {
   // const { data: session } = useSession();
@@ -11,6 +12,8 @@ export default function Page() {
   // }
   return (
     <>
+      <VendorNavbar />
+      <AddButton />
       <Dashboard />
     </>
   );
