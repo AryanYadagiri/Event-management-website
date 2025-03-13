@@ -58,3 +58,5 @@ export const VendorValidation = Yup.object({
     .matches(pincodeRegex, "Invalid pincode")
     .required("Please enter your pincode"),
 });
+
+// 12ABCDE1234F1Z5

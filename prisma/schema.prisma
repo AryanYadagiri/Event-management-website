@@ -26,7 +26,7 @@ model User {
   state           String
   pincode         String
   cart            Service_Cart[]
-  bill            Bill[]
+  // bill            Bill[]
 }
 
 model Service_Cart {
@@ -36,15 +36,15 @@ model Service_Cart {
   current_total Float
 }
 
-model Bill {
-  bill_number Int       @id @default(autoincrement())
-  customer    User      @relation(fields: [customer_id], references: [user_id])
-  customer_id Int
-  services    Service[]
-  service_id  Int       @unique
-  date        DateTime
-  bill_amount Float
-}
+// model Bill {
+//   bill_number Int       @id @default(autoincrement())
+//   customer    User      @relation(fields: [customer_id], references: [user_id])
+//   customer_id Int
+//   services    Service[]
+//   service_id  Int       @unique
+//   date        DateTime
+//   bill_amount Float
+// }
 
 model EventVendor {
   event_vendor_id  Int       @id @default(autoincrement())
@@ -69,7 +69,7 @@ enum UserType {
 
 model Service {
   service_id          Int            @id @default(autoincrement())
-  bills               Bill           @relation(fields: [service_id], references: [service_id])
+  // bills               Bill           @relation(fields: [service_id], references: [service_id])
   event_vendor        EventVendor    @relation(fields: [event_vendor_id], references: [event_vendor_id])
   event_vendor_id     Int
   service_name        String

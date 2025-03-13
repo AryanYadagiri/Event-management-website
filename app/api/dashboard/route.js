@@ -2,17 +2,31 @@ import prisma from "@/utils";
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 
-export  const POST = auth( async function POST(request) {
+export const POST = auth(async function POST(request) {
   try {
     const req = await request.json();
     // const session = await auth();
-    console.log(request);
+    // console.log("dashboard route: ",parseInt( request.auth.user.id));
+
+    // const vendor = await prisma.eventVendor.findUnique({
+    //   where: { event_vendor_id: parseInt( request.auth.user.id) }
+    // });
+
+    // if (!vendor) {
+    //   console.log("EventVendor not found!");
+    // } else {
+    //   console.log("Found EventVendor:", vendor);
+    // }
+
     await prisma.service.create({
       data: {
-        event_vendor_id: request.auth.user.id,
+        // event_vendor_id: Number(request.auth.user.id),
         service_name: req.service_name,
         service_description: req.service_description,
-        charges: req.charges,
+        charges: Number(req.charges),
+        event_vendor: {
+          connect: { event_vendor_id: parseInt(request.auth.user.id) },
+        },
       },
     });
 
@@ -21,13 +35,16 @@ export  const POST = auth( async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error in creating service:", error.message || "Unknown error");
+    console.error(
+      "Error in creating service:",
+      error.message || "Unknown error"
+    );
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
     );
   }
-})
+});
 
 // export async function PUT(request) {
 //   try {
