@@ -1,12 +1,37 @@
 "use client";
 
 import { useState } from "react";
+import { useFormik } from "formik";
+import axios from "axios";
+
+const initialValues = {
+  service_name: "",
+  service_description: "",
+  categories: [],
+  charges: "",
+};
 
 export default function AddButton() {
   const [showModal, setShowModal] = useState(false);
   const handleAdd = () => {
     setShowModal(12);
   };
+  const { values, errors, touched, handleSubmit, handleChange } = useFormik({
+    initialValues: initialValues,
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values, null, 2));
+      const response = axios.post(API, {
+        service_name: values.service_name,
+        service_description: values.service_description,
+        categories: values.categories,
+        charges: values.charges,
+      });
+      console.log(response);
+      if (response.status === 201) {
+        alert("action completed");
+      }
+    },
+  });
   return (
     <>
       <div className="flex flex-wrap justify-center gap-6">
@@ -18,7 +43,7 @@ export default function AddButton() {
         </button>
       </div>
       {showModal && (
-        <form class="max-w-sm mx-auto">
+        <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
           <div
             className="relative z-10"
             aria-labelledby="modal-title"
@@ -43,7 +68,7 @@ export default function AddButton() {
                           Add service
                         </h3>
                         <div className="mt-2">
-                          <div class="mb-5">
+                          <div className="mb-5">
                             <label
                               htmlFor="service_name"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -53,10 +78,12 @@ export default function AddButton() {
                             <input
                               type="text"
                               id="service_name"
+                              value={values.service_name}
+                              onChange={handleChange}
                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             />
                           </div>
-                          <div class="mb-5">
+                          <div className="mb-5">
                             <label
                               htmlFor="service_description"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -66,74 +93,80 @@ export default function AddButton() {
                             <input
                               type="text"
                               id="service_description"
+                              value={values.service_description}
+                              onChange={handleChange}
                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             />
                           </div>
-                          <div class="mb-5">
+                          <div className="mb-5">
                             <label
                               htmlFor="countries"
-                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
                               Select categories
                             </label>
-                            <div class="flex items-center mb-4">
+                            <div className="flex items-center mb-4">
                               <input
                                 id="checkbox-1"
                                 type="checkbox"
-                                value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                name="category"
+                                value="catering"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
                                 htmlFor="checkbox-1"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Catering
                               </label>
                             </div>
-                            <div class="flex items-center mb-4">
+                            <div className="flex items-center mb-4">
                               <input
                                 id="checkbox-2"
                                 type="checkbox"
-                                value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                name="catering"
+                                value="renting"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
                                 htmlFor="checkbox-2"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Renting
                               </label>
                             </div>
-                            <div class="flex items-center mb-4">
+                            <div className="flex items-center mb-4">
                               <input
                                 id="checkbox-3"
                                 type="checkbox"
-                                value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                name="catering"
+                                value="bar"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
                                 htmlFor="checkbox-3"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Bar
                               </label>
                             </div>
-                            <div class="flex items-center mb-4">
+                            <div className="flex items-center mb-4">
                               <input
                                 id="checkbox-4"
                                 type="checkbox"
-                                value=""
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                name="catering"
+                                value="decorators"
+                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
                               <label
                                 htmlFor="checkbox-4"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                               >
                                 Decorators
                               </label>
                             </div>
                           </div>
-                          <div class="mb-5">
+                          <div className="mb-5">
                             <label
                               htmlFor="charges"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -143,6 +176,8 @@ export default function AddButton() {
                             <input
                               type="text"
                               id="charges"
+                              value={values.charges}
+                              onChange={handleChange}
                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             />
                           </div>
