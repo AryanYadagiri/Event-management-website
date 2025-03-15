@@ -23,6 +23,7 @@ export const POST = auth(async function POST(request) {
         // event_vendor_id: Number(request.auth.user.id),
         service_name: req.service_name,
         service_description: req.service_description,
+        categories: req.categories,
         charges: Number(req.charges),
         event_vendor: {
           connect: { event_vendor_id: parseInt(request.auth.user.id) },
@@ -48,14 +49,15 @@ export const POST = auth(async function POST(request) {
 
 export const GET = auth(async function GET(request) {
   try {
-    // // console.log("service route: ", parseInt(request.auth.user.id))
-    // const id = parseInt(request.auth.user.id)
+    // console.log("service route: ", parseInt(request.auth.user.id))
+    const id = parseInt(request?.auth?.user?.id);
     // console.log(id)
-    
+    console.log("hello");
     const services = await prisma.service.findMany({
-      where: { event_vendor_id: 1 },
+      where: { event_vendor_id: id },
+      // include: { categories: true },
     });
-    console.log("vendor services = ", services)
+    console.log("vendor services = ", services);
     return NextResponse.json(
       { data: services },
       { message: "Services retrived" },

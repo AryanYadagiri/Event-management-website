@@ -75,12 +75,6 @@ model Service {
   service_name        String
   service_description String
   charges             Float
-  categories          Category[]
+  categories          String[]
   carts               Service_Cart[] @relation("CartServices")
-}
-
-model Category {
-  category_id Int     @id @default(autoincrement())
-  services    Service @relation(fields: [service_id], references: [service_id])
-  service_id  Int
 }

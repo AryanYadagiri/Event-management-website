@@ -14,7 +14,7 @@ const initialValues = {
 export default function AddButton() {
   const [showModal, setShowModal] = useState(false);
   const handleAdd = () => {
-    setShowModal(12);
+    setShowModal(true);
   };
   const API = "http://localhost:3000/api/dashboard";
   // const { values, errors, touched, handleSubmit, handleChange } = useFormik({
