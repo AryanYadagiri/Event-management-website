@@ -110,9 +110,16 @@ export default function SignIn() {
               Don’t have an account yet?{" "}
               <a
                 href="/signup"
-                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                className="font-medium text-gray-950 hover:underline dark:text-primary-500"
               >
-                Sign up
+                Sign up{" "}
+              </a>
+              or become an{" "}
+              <a
+                href="/vendor-signup"
+                className="font-medium text-gray-950 hover:underline dark:text-primary-500"
+              >
+                Event vendor
               </a>
             </p>
             {error && <p style={{ color: "red" }}>{error}</p>}

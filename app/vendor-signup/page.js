@@ -23,9 +23,9 @@ export default function Page() {
   const API = "http://localhost:3000/api/vendor-signup";
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues: initialValues,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(JSON.stringify(values, null, 2));
-      const response = axios.post(API, {
+      const response = await axios.post(API, {
         first_name: values.first_name,
         last_name: values.last_name,
         password: values.password,
@@ -37,7 +37,7 @@ export default function Page() {
         state: values.state,
         pincode: values.pincode,
       });
-      // console.log(response);
+      console.log(response);
       if (response.status === 201) {
         router.push("/login");
       }
@@ -55,6 +55,15 @@ export default function Page() {
                 <div className="text-gray-600">
                   <p className="font-medium text-lg">Registration Form</p>
                   <p>Please fill out all the fields.</p>
+                  <p className="mt-10 text-sm font-light text-black-600 dark:text-black-400">
+                    Already a vendor ?{" "}
+                    <a
+                      href="/login"
+                      className="font-bold text-black-600 hover:underline dark:text-black-500"
+                    >
+                      Login here
+                    </a>
+                  </p>
                 </div>
 
                 <div className="lg:col-span-2">

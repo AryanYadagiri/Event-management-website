@@ -1,8 +1,12 @@
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
+import axios from "axios";
 
 export default function Dashboard() {
+  const API = "http://localhost:3000/api/dashboard";
+  const services = axios.get(API)
+  // console.log("services = ", services)
   return (
     <div className="p-5">
       <div className="min-w-full overflow-x-auto rounded-sm">

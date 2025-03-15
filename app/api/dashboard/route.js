@@ -46,6 +46,30 @@ export const POST = auth(async function POST(request) {
   }
 });
 
+export const GET = auth(async function GET(request) {
+  try {
+    console.log("service route: ", parseInt(request.auth.user))
+    
+    const services = await prisma.service.findMany({
+      where: { event_vendor_id: parseInt(request.auth.user.id) },
+    });
+    return NextResponse.json(
+      { data: services },
+      { message: "Services retrived" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error(
+      "Error in retrieving services:",
+      error.message || "Unknown error"
+    );
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
+  }
+});
+
 // export async function PUT(request) {
 //   try {
 //     const req = await request.json();
