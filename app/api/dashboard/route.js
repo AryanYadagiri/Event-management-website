@@ -48,11 +48,14 @@ export const POST = auth(async function POST(request) {
 
 export const GET = auth(async function GET(request) {
   try {
-    console.log("service route: ", parseInt(request.auth.user))
+    // // console.log("service route: ", parseInt(request.auth.user.id))
+    // const id = parseInt(request.auth.user.id)
+    // console.log(id)
     
     const services = await prisma.service.findMany({
-      where: { event_vendor_id: parseInt(request.auth.user.id) },
+      where: { event_vendor_id: 1 },
     });
+    console.log("vendor services = ", services)
     return NextResponse.json(
       { data: services },
       { message: "Services retrived" },
