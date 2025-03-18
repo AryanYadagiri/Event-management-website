@@ -1,7 +1,6 @@
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
 import UpdateButton from "./UpdateButton";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
@@ -46,7 +45,10 @@ export default function Dashboard() {
             {data &&
               data.length > 0 &&
               data.map((elem) => (
-                <tr key={elem.service_id} className="border-b border-neutral-100 hover:bg-neutral-50">
+                <tr
+                  key={elem.service_id}
+                  className="border-b border-neutral-100 hover:bg-neutral-50"
+                >
                   <td className="p-3 text-start font-semibold text-neutral-600">
                     {elem.service_id}
                   </td>
@@ -63,25 +65,35 @@ export default function Dashboard() {
                   <td className="p-3 text-start">{elem.service_name}</td>
                   <td className="p-3 text-start">{elem.service_description}</td>
                   <td className="p-3 text-start">
-                    <div className="inline-block rounded-full bg-purple-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-purple-800">
-                      Catering
-                    </div>
-                    <div className="inline-block rounded-full bg-emerald-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-emerald-800">
-                      Bar
-                    </div>
-                    <div className="inline-block rounded-full bg-orange-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-orange-800">
-                      Renting
-                    </div>
-                    <div className="inline-block rounded-full bg-blue-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-blue-800">
-                      Decorators
-                    </div>
+                    {elem.categories.includes("catering") ? (
+                      <div className="inline-block rounded-full bg-purple-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-purple-800">
+                        Catering
+                      </div>
+                    ) : null}
+                    {elem.categories.includes("renting") ? (
+                      <div className="inline-block rounded-full bg-emerald-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-emerald-800">
+                        Renting
+                      </div>
+                    ) : null}
+                    {elem.categories.includes("bar") ? (
+                      <div className="inline-block rounded-full bg-orange-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-orange-800">
+                        Bar
+                      </div>
+                    ) : null}
+                    {elem.categories.includes("decorators") ? (
+                      <div className="inline-block rounded-full bg-blue-100 px-2 py-1 text-xs leading-4 font-semibold whitespace-nowrap text-blue-800">
+                        Decorators
+                      </div>
+                    ) : null}
                   </td>
-                  <td className="p-3 font-medium text-green-500">10000</td>
-                  <td className="p-3 text-end font-medium">
-                    <UpdateButton />
+                  <td className="p-3 font-medium text-green-500">
+                    {elem.charges}
                   </td>
                   <td className="p-3 text-end font-medium">
-                    <DeleteButton />
+                    <UpdateButton data={elem} />
+                  </td>
+                  <td className="p-3 text-end font-medium">
+                    <DeleteButton data={elem} />
                   </td>
                 </tr>
               ))}

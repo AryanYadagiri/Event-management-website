@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  user_id         Int            @id @default(autoincrement())
+  id         Int            @id @default(autoincrement())
   first_name      String
   last_name       String
   phone_number    String         @unique
@@ -30,7 +30,7 @@ model User {
 }
 
 model Service_Cart {
-  customer      User      @relation(fields: [card_id], references: [user_id])
+  customer      User      @relation(fields: [card_id], references: [id])
   card_id       Int       @id @default(autoincrement())
   services      Service[] @relation("CartServices")
   current_total Float
@@ -47,7 +47,7 @@ model Service_Cart {
 // }
 
 model EventVendor {
-  event_vendor_id  Int       @id @default(autoincrement())
+  id  Int       @id @default(autoincrement())
   first_name       String
   last_name        String
   business_number  String    @unique
@@ -70,7 +70,7 @@ enum UserType {
 model Service {
   service_id          Int            @id @default(autoincrement())
   // bills               Bill           @relation(fields: [service_id], references: [service_id])
-  event_vendor        EventVendor    @relation(fields: [event_vendor_id], references: [event_vendor_id])
+  event_vendor        EventVendor    @relation(fields: [event_vendor_id], references: [id])
   event_vendor_id     Int
   service_name        String
   service_description String

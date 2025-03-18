@@ -58,6 +58,7 @@ export default function AddButton() {
             if (response.status === 201) {
               alert("action completed");
               setShowModal(false);
+              location.reload();
             }
           }}
         >

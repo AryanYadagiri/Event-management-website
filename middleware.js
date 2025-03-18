@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
 export default auth((request) => {
-  // console.log("In middleware: ", request.auth);
+  // console.log("In middleware: ", parseInt(request?.auth?.user?.id));
   if (!request.auth || request.auth.user.user_type !== "vendor") {
     if (request.nextUrl.pathname === "/dashboard") {
       return NextResponse.redirect(new URL("/", request.url));

@@ -4,19 +4,22 @@ import { Formik, Field, Form } from "formik";
 import axios from "axios";
 
 const initialValues = {
+  service_id: "",
   service_name: "",
   service_description: "",
   categories: [],
   charges: "",
 };
 
-export default function UpdateButton() {
+export default function UpdateButton({ data }) {
   const [showModal, setShowModal] = useState(false);
+  const API = "http://localhost:3000/api/dashboard";
   const handleUpdate = () => {
     setShowModal(12);
   };
   return (
     <>
+      {/* {JSON.stringify(data.service_id)} */}
       <button
         type="button"
         onClick={handleUpdate}
@@ -30,16 +33,18 @@ export default function UpdateButton() {
           initialValues={initialValues}
           onSubmit={async (values) => {
             console.log(JSON.stringify(values, null, 2));
-            const response = await axios.post(API, {
+            const response = await axios.put(API, {
+              service_id: data.service_id,
               service_name: values.service_name,
               service_description: values.service_description,
               categories: values.categories,
               charges: values.charges,
             });
             console.log(response);
-            if (response.status === 201) {
+            if (response.status === 200) {
               alert("action completed");
               setShowModal(false);
+              location.reload();
             }
           }}
         >

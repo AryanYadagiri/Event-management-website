@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   try {
-    const searchParams = request.nextUrl.searchParams
+    const searchParams = request.nextUrl.searchParams;
     const category = searchParams.get("category");
     const whereClause = category === "all" ? {} : { categories: category };
     const cursor = searchParams.get("cursor");
-    const button = searchParams.get("buttom");
+    const button = searchParams.get("button");
 
     if (button === "next") {
       const queryResults = await prisma.service.findMany({
@@ -15,9 +15,9 @@ export async function GET(request) {
         where: whereClause,
         select: { service_name: true, charges: true },
         orderBy: {
-          id: "asc",
+          service_id: "asc",
         },
-        ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
+        ...(cursor ? { cursor: { service_id: parseInt(cursor) }, skip: 1 } : {}),
       });
       if (queryResults.length === 8) {
         const myCursor = queryResults[7].id;
@@ -55,6 +55,10 @@ export async function GET(request) {
       }
     }
   } catch (error) {
+    console.error(
+      "Error in fetching services:",
+      error.message || "Unknown error"
+    );
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
