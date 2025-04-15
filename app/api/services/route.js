@@ -3,21 +3,42 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   try {
+    // const req = request.json()
+    // console.log("services api: ", req)
     const searchParams = request.nextUrl.searchParams;
     const category = searchParams.get("category");
-    const whereClause = category === "all" ? {} : { categories: category };
+    const whereClause =
+      category === "all"
+        ? {}
+        : {
+            
+          };
     const cursor = searchParams.get("cursor");
     const button = searchParams.get("button");
 
     if (button === "next") {
+      console.log("####")
+      // const queryResults = await prisma.service.findMany({
+      //   take: 8,
+      //   // where: whereClause,
+      //   select: { service_name: true, charges: true },
+      //   orderBy: {
+      //     service_id: "asc",
+      //   },
+      //   ...(cursor
+      //     ? { cursor: { service_id: parseInt(cursor) }, skip: 0 }
+      //     : {}),
+      // });
       const queryResults = await prisma.service.findMany({
         take: 8,
-        where: whereClause,
-        select: { service_name: true, charges: true },
+        select: { service_name: true, charges: true, service_description: true, image_url: true },
         orderBy: {
-          service_id: "asc",
-        },
-        ...(cursor ? { cursor: { service_id: parseInt(cursor) }, skip: 1 } : {}),
+              service_id: "asc",
+            },
+            ...(cursor
+                  ? { cursor: { service_id: parseInt(27) }}
+                  : {}),
+
       });
       if (queryResults.length === 8) {
         const myCursor = queryResults[7].id;

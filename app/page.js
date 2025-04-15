@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-        <Slider />
+      <Slider />
       <Footer />
     </>
   );

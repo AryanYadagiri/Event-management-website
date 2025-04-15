@@ -15,6 +15,7 @@ export default function Dashboard() {
   useEffect(() => {
     getData();
   }, []);
+  
   return (
     <div className="p-5">
       <div className="min-w-full overflow-x-auto rounded-sm">
@@ -56,8 +57,9 @@ export default function Dashboard() {
                     {" "}
                     <Image
                       className="h-16 w-16"
-                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
-                      alt="Product Image"
+                      // src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+                      src={elem.image_url}
+                      alt="Service Image"
                       width={500}
                       height={500}
                     />

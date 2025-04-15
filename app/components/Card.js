@@ -7,7 +7,7 @@ export function Card(prop) {
       <div className="relative">
         <Image
           className="w-full"
-          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+          src={prop.image_url}
           alt="Image"
           width={500}
           height={500}
@@ -22,7 +22,7 @@ export function Card(prop) {
           {prop.service_description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="font-bold text-lg">$19.99</span>
+          <span className="font-bold text-lg">Rs{prop.charge}</span>
           <ExploreButton/>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Formik, Field, Form } from "formik";
+import { CldUploadWidget } from "next-cloudinary";
 import axios from "axios";
 
 const initialValues = {
@@ -13,6 +14,7 @@ const initialValues = {
 
 export default function UpdateButton({ data }) {
   const [showModal, setShowModal] = useState(false);
+  const [image_url, setUrl] = useState("")
   const API = "http://localhost:3000/api/dashboard";
   const handleUpdate = () => {
     setShowModal(12);
@@ -35,6 +37,7 @@ export default function UpdateButton({ data }) {
             console.log(JSON.stringify(values, null, 2));
             const response = await axios.put(API, {
               service_id: data.service_id,
+              image_url: image_url,
               service_name: values.service_name,
               service_description: values.service_description,
               categories: values.categories,
@@ -74,6 +77,32 @@ export default function UpdateButton({ data }) {
                               Update service
                             </h3>
                             <div className="mt-2">
+                            <div className="mb-5">
+                                <label
+                                  htmlFor="service_image"
+                                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >
+                                  Service image
+                                </label>
+                                <CldUploadWidget
+                                  uploadPreset="unsigned_preset"
+                                  onSuccess={(result) => {
+                                    console.log(result.info.url);
+                                  }}
+                                >
+                                  {({ open }) => {
+                                    return (
+                                      <button
+                                        type="button"
+                                        onClick={() => open()}
+                                        className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                      >
+                                        Upload an Image
+                                      </button>
+                                    );
+                                  }}
+                                </CldUploadWidget>
+                              </div>
                               <div className="mb-5">
                                 <label
                                   htmlFor="service_name"

@@ -18,6 +18,7 @@ export const POST = auth(async function POST(request) {
 
     await prisma.service.create({
       data: {
+        image_url: req.image_url,
         service_name: req.service_name,
         service_description: req.service_description,
         categories: req.categories,
@@ -92,6 +93,7 @@ export const PUT = auth(async function PUT(request) {
           service_id: req.service_id,
         },
         data: {
+          ...(req.image_url ? { image_url: req.image_url } : {}),
           ...(req.service_name ? { service_name: req.service_name } : {}),
           ...(req.service_description
             ? { service_description: req.service_description }
