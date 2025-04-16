@@ -7,17 +7,12 @@ export async function GET(request) {
     // console.log("services api: ", req)
     const searchParams = request.nextUrl.searchParams;
     const category = searchParams.get("category");
-    const whereClause =
-      category === "all"
-        ? {}
-        : {
-            
-          };
+    const whereClause = category === "all" ? {} : {};
     const cursor = searchParams.get("cursor");
     const button = searchParams.get("button");
 
     if (button === "next") {
-      console.log("####")
+      console.log("####");
       // const queryResults = await prisma.service.findMany({
       //   take: 8,
       //   // where: whereClause,
@@ -31,14 +26,17 @@ export async function GET(request) {
       // });
       const queryResults = await prisma.service.findMany({
         take: 8,
-        select: { service_name: true, charges: true, service_description: true, image_url: true },
+        select: {
+          service_id: true,
+          service_name: true,
+          charges: true,
+          service_description: true,
+          image_url: true,
+        },
         orderBy: {
-              service_id: "asc",
-            },
-            ...(cursor
-                  ? { cursor: { service_id: parseInt(27) }}
-                  : {}),
-
+          service_id: "asc",
+        },
+        ...(cursor ? { cursor: { service_id: parseInt(cursor) } } : {}),
       });
       if (queryResults.length === 8) {
         const myCursor = queryResults[7].id;
@@ -56,11 +54,16 @@ export async function GET(request) {
       const queryResults = await prisma.service.findMany({
         take: -8,
         where: whereClause,
-        select: { service_name: true, charges: true },
-        orderBy: {
-          id: "asc",
+        select: {
+          service_name: true,
+          charges: true,
+          service_description: true,
+          image_url: true,
         },
-        ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
+        orderBy: {
+          service_id: "asc",
+        },
+        ...(cursor ? { cursor: { service_id: parseInt(cursor) } } : {}),
       });
       if (queryResults.length === 8) {
         const myCursor = queryResults[0].id;

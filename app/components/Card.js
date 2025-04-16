@@ -1,12 +1,13 @@
 import Image from "next/image";
 import ExploreButton from "./ExploreButton";
 
-export function Card(prop) {
+export function Card({ prop }) {
   return (
-    <div className="max-w-64 rounded-md overflow-hidden shadow-md hover:shadow-lg">
-      <div className="relative">
+    <div className="max-w-64 min-w-64 rounded-md overflow-hidden shadow-md hover:shadow-lg">
+      <div className="relative h-48 w-full">
         <Image
-          className="w-full"
+          // className="w-full"
+           className="object-cover w-full h-full"
           src={prop.image_url}
           alt="Image"
           width={500}
@@ -18,12 +19,10 @@ export function Card(prop) {
       </div>
       <div className="p-4">
         <h3 className="text-lg font-medium mb-2">{prop.service_name}</h3>
-        <p className="text-gray-600 text-sm mb-4">
-          {prop.service_description}
-        </p>
+        <p className="text-gray-600 text-sm mb-4">{prop.service_description}</p>
         <div className="flex items-center justify-between">
-          <span className="font-bold text-lg">Rs{prop.charge}</span>
-          <ExploreButton/>
+          <span className="font-bold text-lg">Rs {prop.charges}</span>
+          <ExploreButton prop={prop.service_id}/>
         </div>
       </div>
     </div>
