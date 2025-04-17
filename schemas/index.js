@@ -60,3 +60,15 @@ export const VendorValidation = Yup.object({
 });
 
 // 12ABCDE1234F1Z5
+
+export const ContactUsValidation = Yup.object({
+  subject: Yup.string()
+    .min(2)
+    .max(20)
+    .required("Please enter your subject"),
+  email: Yup.string().email().required("Please enter your email"),
+  message: Yup.string()
+  .min(2)
+  .max(200)
+  .required("Please enter your subject"),
+});

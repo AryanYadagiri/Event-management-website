@@ -87,7 +87,7 @@ export default function UpdateButton({ data }) {
                                 <CldUploadWidget
                                   uploadPreset="unsigned_preset"
                                   onSuccess={(result) => {
-                                    console.log(result.info.url);
+                                    setUrl(result.info.url);
                                   }}
                                 >
                                   {({ open }) => {
