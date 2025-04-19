@@ -21,7 +21,7 @@ const initialValues = {
 export default function Page() {
   const router = useRouter();
   const API = "http://localhost:3000/api/vendor-signup";
-  const { values, errors, touched, handleSubmit, handleChange } = useFormik({
+  const { values, errors, touched, handleSubmit, handleChange, handleBlur } = useFormik({
     initialValues: initialValues,
     onSubmit: async (values) => {
       console.log(JSON.stringify(values, null, 2));
@@ -77,6 +77,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.first_name}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {errors.first_name && touched.first_name ? (
                         <p className="text-red-700">{errors.first_name}</p>
@@ -91,6 +92,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.last_name}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {errors.last_name && touched.last_name ? (
                         <p className="text-red-700">{errors.last_name}</p>
@@ -105,6 +107,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.password}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {errors.password && touched.password ? (
                         <p className="text-red-700">{errors.password}</p>
@@ -119,6 +122,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.confirm_password}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {errors.confirm_password && touched.confirm_password ? (
                         <p className="text-red-700">
@@ -135,6 +139,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.GST_number}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {errors.GST_number && touched.GST_number ? (
                         <p className="text-red-700">{errors.GST_number}</p>
@@ -149,6 +154,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.email}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder="email@domain.com"
                       />
                       {errors.email && touched.email ? (
@@ -164,6 +170,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.phone_number}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {errors.phone_number && touched.phone_number ? (
                         <p className="text-red-700">{errors.phone_number}</p>
@@ -178,6 +185,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.address}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder=""
                       />
                       {errors.address && touched.address ? (
@@ -194,6 +202,7 @@ export default function Page() {
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         value={values.city}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         placeholder=""
                       />
                       {errors.city && touched.city ? (
@@ -210,6 +219,7 @@ export default function Page() {
                           className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                           value={values.state}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                         />
                         {errors.state && touched.state ? (
                           <p className="text-red-700">{errors.state}</p>
@@ -227,6 +237,7 @@ export default function Page() {
                         placeholder=""
                         value={values.pincode}
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       {errors.pincode && touched.pincode ? (
                         <p className="text-red-700">{errors.pincode}</p>

@@ -18,7 +18,7 @@ export const RegularValidation = Yup.object({
     .required("Please enter your phone number"),
   password: Yup.string().min(5).required("Please set password"),
   confirm_password: Yup.string()
-    .required()
+    .required("Please confirm your password")
     .oneOf([Yup.ref("password"), null], "Password must match"),
   address: Yup.string().max(50).required("Please enter your address"),
   city: Yup.string().max(20).required("Please enter your city"),
@@ -43,7 +43,7 @@ export const VendorValidation = Yup.object({
     .required("Please enter your phone number"),
   password: Yup.string().min(5).required("Please set password"),
   confirm_password: Yup.string()
-    .required()
+    .required("Please confirm your password")
     .oneOf([Yup.ref("password"), null], "Password must match"),
   GST_number: Yup.string()
     .matches(

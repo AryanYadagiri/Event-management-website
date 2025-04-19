@@ -7,14 +7,16 @@ export default auth((request) => {
     if (request.nextUrl.pathname === "/dashboard") {
       return NextResponse.redirect(new URL("/", request.url));
     }
+    if (request.nextUrl.pathname.startsWith("service")) {
+      alert("Please login first to book services")
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 
-  if (
-    request.auth &&
-    request.auth.user.user_type === "vendor" &&
-    request.nextUrl.pathname === "/ "
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  if (request.auth && request.auth.user.user_type === "vendor") {
+    if (request.nextUrl.pathname === "/ ") {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
   }
 
   if (

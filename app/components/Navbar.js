@@ -16,7 +16,7 @@ export default function Navbar() {
             alt="Website Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Evently
+            EventEase
           </span>
         </a>
         <div className="flex md:order-2">
