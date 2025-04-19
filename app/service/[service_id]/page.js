@@ -2,6 +2,7 @@ import axios from "axios";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import Image from "next/image";
+import Payment from "@/app/components/Payment";
 
 export default async function Page({ params }) {
   const { service_id } = await params;
@@ -12,38 +13,13 @@ export default async function Page({ params }) {
   // console.log(data.data.image_url)
   return (
     <>
-      {/* {JSON.stringify(response.data.data.image_url)} */}
-      <Navbar/>
+      <Navbar />
       <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
         <header className="h-24 sm:h-32 flex items-center z-30 w-full">
           <div className="container mx-auto px-6 flex items-center justify-between">
             <div className="uppercase text-gray-800 dark:text-white font-black text-7xl">
               {data.service_name}
             </div>
-            {/* <div className="flex items-center">
-              <nav className="font-sen text-gray-800 dark:text-white uppercase text-lg lg:flex items-center hidden">
-                <a href="#" className="py-2 px-6 flex">
-                  Home
-                </a>
-                <a href="#" className="py-2 px-6 flex">
-                  Watch
-                </a>
-                <a href="#" className="py-2 px-6 flex">
-                  Product
-                </a>
-                <a href="#" className="py-2 px-6 flex">
-                  Contact
-                </a>
-                <a href="#" className="py-2 px-6 flex">
-                  Carrer
-                </a>
-              </nav>
-              <button className="lg:hidden flex flex-col ml-4">
-                <span className="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
-                <span className="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
-                <span className="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
-              </button>
-            </div> */}
           </div>
         </header>
         <div className="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
@@ -57,17 +33,13 @@ export default async function Page({ params }) {
                 Rs {data.charges}
               </p>
               <div className="flex mt-8">
-                <a
-                  href="#"
-                  className="uppercase py-2 px-4 rounded-lg bg-blue-700 border-2 border-transparent text-white text-md mr-4 hover:bg-blue-400"
-                >
-                  Book Service
-                </a>
+                <Payment service={data.service_id} />
+
                 <a
                   href="#"
                   className="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-blue-700 text-blue-500 dark:text-white hover:bg-blue-500 hover:text-white text-md"
                 >
-                  Read more
+                  Business Info
                 </a>
               </div>
             </div>
@@ -81,8 +53,7 @@ export default async function Page({ params }) {
             </div>
           </div>
         </div>
-      <Footer/>
-
+        <Footer />
       </main>
     </>
   );
