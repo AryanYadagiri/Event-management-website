@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("regular"); // default to 'regular'
+  const [userType, setUserType] = useState("regular");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -15,17 +15,15 @@ export default function SignIn() {
       email,
       password,
       userType,
-      redirect: false, // Don't auto-redirect after successful sign-in
+      redirect: false, 
     });
-    // console.log('res',res);
     if (res?.error) {
-      setError(res.error); // Display error message
+      setError(res.error); 
     } else if (userType === "regular" && res.status === 200) {
-      // Redirect user to the homepage or dashboard after successful login
-      window.location.href = "/"; // Change this based on your requirements
+      window.location.href = "/"; 
     } else if (userType === "vendor" && res.status === 200) {
       console.log("vendor login");
-      window.location.href = "/dashboard"; // Change this based on your requirements
+      window.location.href = "/dashboard"; 
     }
   };
 

@@ -18,7 +18,7 @@ export const POST = auth(async function POST(request) {
     });
 
     var options = {
-      amount: service.charges,
+      amount: service.charges * 100,
       currency: "INR",
       receipt: "rcp1",
     };

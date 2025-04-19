@@ -1,17 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Card } from "./Card";
 import axios from "axios";
 
-export default function Slider() {
+export default function Slider({ search }) {
   const [services, setServices] = useState([]);
   const [nav, setNav] = useState("next");
   const [cursor, setCursor] = useState(27);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("search");
   const getServices = async () => {
     const API = "http://localhost:3000/api/services";
     const response = await axios.get(API, {
       params: {
-        category: "renting",
+        search: search,
         cursor: cursor,
         button: nav,
       },
@@ -148,6 +151,7 @@ export default function Slider() {
           </div>
         </div>
       </div>
+      {/* {JSON.stringify(query)} */}
     </>
   );
 }
