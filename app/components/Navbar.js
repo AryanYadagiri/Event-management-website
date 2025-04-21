@@ -1,5 +1,6 @@
 import AuthButton from "./AuthButton";
 import SearchBar from "./SearchBar";
+import ProfileButton from "./ProfileButton";
 
 export default function Navbar() {
   return (
@@ -65,6 +66,7 @@ export default function Navbar() {
             <SearchBar />
           </div>
           <AuthButton />
+          <ProfileButton/>
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
@@ -82,7 +84,7 @@ export default function Navbar() {
             </li>
             <li>
               <a
-                href="#"
+                href="/about"
                 className="block py-2 px-3 font-bold text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
               >
                 About

@@ -6,24 +6,12 @@ export async function GET(request) {
     // const req = request.json()
     // console.log("services api: ", req)
     const searchParams = request.nextUrl.searchParams;
-    const category = searchParams.get("category");
-    const whereClause = category === "all" ? {} : {};
+    const search = searchParams.get("search");
     const cursor = searchParams.get("cursor");
     const button = searchParams.get("button");
 
     if (button === "next") {
-      console.log("####");
-      // const queryResults = await prisma.service.findMany({
-      //   take: 8,
-      //   // where: whereClause,
-      //   select: { service_name: true, charges: true },
-      //   orderBy: {
-      //     service_id: "asc",
-      //   },
-      //   ...(cursor
-      //     ? { cursor: { service_id: parseInt(cursor) }, skip: 0 }
-      //     : {}),
-      // });
+      // console.log("####");
       const queryResults = await prisma.service.findMany({
         take: 8,
         select: {
@@ -33,6 +21,29 @@ export async function GET(request) {
           service_description: true,
           image_url: true,
         },
+        ...(search ? {
+          where: {
+            OR: [
+              {
+                service_name: {
+                  contains: search,
+                  mode: "insensitive"
+                }
+              },
+              {
+                service_description: {
+                  contains: search,
+                  mode: "insensitive"
+                },
+              },
+              {
+                categories: {
+                  has: search
+                }
+              }
+            ]
+          }
+        } : {}),
         orderBy: {
           service_id: "asc",
         },

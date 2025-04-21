@@ -3,7 +3,7 @@ import Script from "next/script";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 
-export default function Payment({ service }) {
+export default function Payment({ service, business_info }) {
   const { data: session } = useSession();
   const createOrderId = async () => {
     try {
@@ -29,7 +29,7 @@ export default function Payment({ service }) {
   const processPayment = async () => {
     // e.preventDefault();
     try {
-      const API = "http://localhost:3000/api/create-order";
+      const API = "http://localhost:3000/api/verify-order";
       const orderId = await createOrderId();
       const options = {
         key: process.env.NEXT_PUBLIC_RAYZORPAY_KEY_ID,
@@ -44,15 +44,15 @@ export default function Payment({ service }) {
             razorpayPaymentId: response.razorpay_payment_id,
             razorpayOrderId: response.razorpay_order_id,
             razorpaySignature: response.razorpay_signature,
+            user_email: session.user.email,
+            business_email: business_info.business_email,
           };
 
-          const result = await axios.post(API, {
-            body: JSON.stringify(data),
-          });
-          const res = await result.json();
-          if (res.isOk) alert("payment succeed");
-          else {
-            alert(res.message);
+          const result = await axios.post(API, data);
+          if (result.status === 200) {
+            alert("payment succeed");
+          } else {
+            alert(result.message);
           }
         },
         prefill: {

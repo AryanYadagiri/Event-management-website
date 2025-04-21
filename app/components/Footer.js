@@ -2,22 +2,16 @@ export default function () {
   return (
     <footer className="flex flex-col space-y-10 justify-center m-10">
       <nav className="flex justify-center flex-wrap gap-6 text-gray-500 font-medium">
-        <a className="hover:text-gray-900" href="#">
+        <a className="hover:text-gray-900" href="/">
           Home
         </a>
-        <a className="hover:text-gray-900" href="#">
+        <a className="hover:text-gray-900" href="/about">
           About
         </a>
-        <a className="hover:text-gray-900" href="#">
+        <a className="hover:text-gray-900" href="/service">
           Services
         </a>
-        <a className="hover:text-gray-900" href="#">
-          Media
-        </a>
-        <a className="hover:text-gray-900" href="#">
-          Gallery
-        </a>
-        <a className="hover:text-gray-900" href="#">
+        <a className="hover:text-gray-900" href="/contact-us">
           Contact
         </a>
       </nav>

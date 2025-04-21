@@ -20,22 +20,6 @@ export default function AddButton() {
     setShowModal(true);
   };
   const API = "http://localhost:3000/api/dashboard";
-  // const { values, errors, touched, handleSubmit, handleChange } = useFormik({
-  //   initialValues: initialValues,
-  //   onSubmit: (values) => {
-  //     console.log(JSON.stringify(values, null, 2));
-  //     // const response = axios.post(API, {
-  //     //   service_name: values.service_name,
-  //     //   service_description: values.service_description,
-  //     //   categories: values.categories,
-  //     //   charges: values.charges,
-  //     // });
-  //     console.log(response);
-  //     if (response.status === 201) {
-  //       alert("action completed");
-  //     }
-  //   },
-  // });
   return (
     <>
       <div className="flex flex-wrap justify-center gap-6">

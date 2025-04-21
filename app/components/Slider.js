@@ -4,12 +4,12 @@ import { useSearchParams } from "next/navigation";
 import { Card } from "./Card";
 import axios from "axios";
 
-export default function Slider({ search }) {
+export default function Slider() {
   const [services, setServices] = useState([]);
   const [nav, setNav] = useState("next");
-  const [cursor, setCursor] = useState(27);
+  const [cursor, setCursor] = useState(1);
   const searchParams = useSearchParams();
-  const query = searchParams.get("search");
+  var search = searchParams.get("search");
   const getServices = async () => {
     const API = "http://localhost:3000/api/services";
     const response = await axios.get(API, {
@@ -24,7 +24,7 @@ export default function Slider({ search }) {
   };
   useEffect(() => {
     getServices();
-  }, []);
+  }, [search]);
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-10 py-10 justify-items-center">

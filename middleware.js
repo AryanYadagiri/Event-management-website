@@ -7,16 +7,23 @@ export default auth((request) => {
     if (request.nextUrl.pathname === "/dashboard") {
       return NextResponse.redirect(new URL("/", request.url));
     }
-    if (request.nextUrl.pathname.startsWith("service")) {
-      alert("Please login first to book services")
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+  }
+
+  if (!request.auth && request.nextUrl.pathname.startsWith("/service")) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (request.auth && request.auth.user.user_type === "vendor") {
-    if (request.nextUrl.pathname === "/ ") {
+    if (
+      request.nextUrl.pathname === "/" ||
+      request.nextUrl.pathname.startsWith("/service")
+    ) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
+  }
+
+  if (!request?.auth?.user && request.nextUrl.pathname === "/profile") {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (
@@ -30,5 +37,13 @@ export default auth((request) => {
 });
 
 export const config = {
-  matcher: ["/dashboard", "/", "/login", "/signup", "/vendor-signup"],
+  matcher: [
+    "/dashboard",
+    "/",
+    "/login",
+    "/signup",
+    "/vendor-signup",
+    "/service/:path*",
+    "/profile",
+  ],
 };
