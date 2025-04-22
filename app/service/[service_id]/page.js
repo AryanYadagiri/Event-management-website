@@ -36,12 +36,12 @@ export default async function Page({ params }) {
               <div className="flex mt-8">
                 <Payment service={data.service_id} business_info={response.data.business_info}/>
 
-                <a
+                {/* <a
                   href="#"
                   className="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-blue-700 text-blue-500 dark:text-white hover:bg-blue-500 hover:text-white text-md"
                 >
                   Business Info
-                </a>
+                </a> */}
               </div>
             </div>
             <div className="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
